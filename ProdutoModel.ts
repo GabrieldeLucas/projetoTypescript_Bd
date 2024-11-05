@@ -1,4 +1,3 @@
-
 import { pool } from './../src/database';
 
 
@@ -18,23 +17,19 @@ export class ProdutoModel{
 
 
 
+   //CREATE
 
-   //create()
-
-   async create(produto: Produto): Promise <void>{
-   await pool.query('INSERT INTO produtos (nome, preco) VALUES  (?, ?)',
-    [produto.nome, produto.preco]);
-    return
+   async create( produto: Produto): Promise <void>{
+    await pool.query('INSERT INTO produtos (nome, preco) VALUES(?, ? )', [produto.nome, produto.preco]);    
    }
 
    // UPDATE
-async update(id: Number, produto: Produto): Promise<void>{
-    await pool.query('UPDATE produtos SET nome = ?, preco = ?, WHERE id = ?',
-    [produto.nome, produto.preco, id]);
-}
+   async update(id: number, produto: Produto): Promise<void>{
+    await pool.query('UPDATE produtos SET nome = ?, preco = ? WHERE id = ?', [produto.nome, produto.preco, id]);
+   }
 
    // DELETE
    async delete(id: number): Promise<void>{
-    await pool.query('DELETE FROM produtos WHERE id = ?', [id]);
+    await pool.query('DELETE FROM produtos WHERE id = ? ', [id]);
    }
 }
